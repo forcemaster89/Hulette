@@ -7,12 +7,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <title>Hulette</title>
 
-  <link rel="stylesheet" href="hulettecss.css">
-  
-  <!-- Extra Codiqa features - ->
-  <link rel="stylesheet" href="css/codiqa.ext.css"> -->
-  
+  <!-- Codiqa stylesheets -->
+  <link rel="stylesheet" href="css/codiqa.ext.css">
   <link rel="stylesheet" href="https://codiqa.com/view/7ec536c0/css">
+  
+  <!-- Hulette stylesheet -->
+  <link rel="stylesheet" href="hulettecss.css">
   
   <!-- jQuery and jQuery Mobile -->
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -20,10 +20,10 @@
 
   <!-- Extra Codiqa features -->
   <script src="https://d10ajoocuyu32n.cloudfront.net/codiqa.ext.js"></script>
-   
   <script src="https://codiqa.com/view/7ec536c0/js"></script>
   
-   <script src="https://apigee.com/usergrid/sdk/usergrid.0.10.5.js"></script>
+  <!-- User Grid -->
+  <script src="https://apigee.com/usergrid/sdk/usergrid.0.10.5.js"></script>
 
 </head>
 <body>
@@ -52,11 +52,7 @@
         <input name="" id="shows_search" placeholder="" value="" type="search" >
       </div>
       <ul data-role="listview" data-divider-theme="b" data-inset="false" id="shows-list" style="margin-top: -2px;">
-        <li data-theme="c" >
-          <a href="#seasons" data-show_id='78' data-transition="slide">
-            Show 1
-          </a>
-        </li>
+
       </ul>
     </div>
     <div data-role="tabbar" data-iconpos="top" data-theme="a">
@@ -105,76 +101,40 @@
       </div>
   </div>
   <!-- Seasons -->
-  <div data-role="page" id="seasons">
-    <div data-theme="a" data-role="header">
-      <a data-transition="slide" href="#shows" style="border:none">
-              <img src="images/left.png">
-          </a>
-      <h3 id='seasons-title'>
-        Name of Show
-      </h3>
-    </div>
-    <div data-role="content">
-    <div id='seasons_detail'>
-      <div style="width: 100%; height: 100px; position: relative; background-color: #fbfbfb; border: 1px solid #b8b8b8; margin:auto;">
-        <img src="http://codiqa.com/static/images/v2/image.png" alt="image" style="position: absolute; top: 50%; left: 50%; margin-left: -16px; margin-top: -18px">
-      </div>
-      <a data-role="button" href="#seasons">
-        IMDB
-      </a>
-      <div id="checkboxes1" data-role="fieldcontain">
-        <fieldset data-role="controlgroup" data-type="horizontal">
-          <input id="checkbox1" name="" type="checkbox">
-          <label for="checkbox1">
-            Favorite
-          </label>
-        </fieldset>
-      </div>
-      <div>
-        <p>
-          <b>
-            Synopsis
-          </b>
-        </p>
-        <p>
-          <b>
-            f
-          </b>
-        </p>
-      </div>
-    </div>
-      <ul data-role="listview" data-divider-theme="b" data-inset="false" id='seasons_list'>
-        <li data-theme="c">
-          <a href="#episodes" data-transition="slide" data-show_id='78' data-season_id='10'>
-            Season 1
-          </a>
-        </li>
-        <li data-theme="c">
-          <a href="#episodes" data-transition="slide" data-show_id='78' data-season_id='69'>
-            Season 2
-          </a>
-        </li>
-      </ul>
-      <div data-role="collapsible-set">
-      </div>
-    </div>
-    <div data-role="tabbar" data-iconpos="top" data-theme="a">
-      <ul>
-        <li>
-                  <a href="#shows" data-transition="fade">
-                  <img src="images/home.png">
-                  </a>
-              </li>
-              <li>
-                  <a href="#hulette" data-transition="fade" onclick="hulette();">
-                  <img src="images/shuffle.png">
-                  </a>
-              </li>
-      </ul>
-    </div>
-  </div>
+	<div data-role="page" id="seasons">
+		<div data-theme="a" data-role="header">
+		  <a data-transition="slide" href="#shows" style="border:none">
+				  <img src="images/left.png">
+			  </a>
+		  <h3 id='seasons-title'>
+			Name of Show
+		  </h3>
+		</div>
+		<div data-role="content">
+		<div id='seasons_detail'>
+		</div>
+		</div>
+		<ul data-role="listview" data-divider-theme="b" data-inset="false" id='seasons_list'>
+		</ul>
+		<div data-role="collapsible-set">
+		</div>
+		<div data-role="tabbar" data-iconpos="top" data-theme="a">
+			<ul>
+				<li>
+					<a href="#shows" data-transition="fade">
+						<img src="images/home.png">
+					</a>
+				</li>
+				<li>
+					<a href="#hulette" data-transition="fade" onclick="hulette();">
+						<img src="images/shuffle.png">
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
   <!-- Episodes -->
-  <div data-role="page" id="episodes">
+	<div data-role="page" id="episodes">
     <div data-theme="a" data-role="header">
       <a data-transition="slide" href="#seasons" style="border:none">
               <img src="images/left.png">
@@ -215,7 +175,7 @@
     </div>
   </div>
   <!-- Episodes popup -->
-  <div data-role="page" id="episode-details">
+	<div data-role="page" id="episode-details">
     <div data-role="header">
       <h1 id='episode-details-head'></h1>
     </div>
@@ -230,339 +190,342 @@
       
     </div>
   </div>
-
-  <script type="text/javascript">
-    var apigee = new Usergrid.Client({
-      orgName: 'hulettemobile',
-      appName: 'sandbox'
-    });
-    var shows_list = [];
-    // A Collection object that will be used to hold the list of shows locally
-    var all_shows = new Usergrid.Collection({
-      "client": apigee,
-      "type": "shows",
-      qs:{limit:50}
-    });
-
-    function loadShows() {
-      all_shows.fetch(
-        function () {
-          $('#shows-list').empty();
-          var i = 0;
-          while (all_shows.hasNextEntity()) {
-            var current_show = all_shows.getNextEntity();
-
-            var show_id = current_show.get("name");
-            var title = current_show.get("title");
-            $("#shows-list").append('<li data-theme="c"><a href="#seasons" data-transition="slide" data-show_title= "' + title + '" data-show_id=' + show_id + ' class="show_id">' + current_show.get("title") + '</a></li>');
-            shows_list[i] = show_id;
-            i++;
-          }
-          // Re-apply jQuery Mobile styles
-          $('#shows-list').listview('refresh');
-        },
-
-        // Failure Callback
-
-        function () {
-          alert("read failed");
-        }
-      );
-    };
-
-    function loadSeasons() {
-      //console.log(event.target.dataset.show_id);
-      /**-loading title-**/
-      var show_title = event.target.dataset.show_title;
-      $('#seasons-title').empty().append(show_title);
-
-      //favorite store
-      var myFave = false;
-      var show_fave = {
-        method: 'GET',
-        endpoint: 'shows/' + event.target.dataset.show_id + '/likes'
-      };
-      apigee.request(show_fave, function (err, data) {
-        //console.log(myFave);
-        if(err)
-          console.log('likes error');
-        else
-          console.log(data.entities[0]);
-          if (data.entities[0] != undefined)
-            myFave = true;
-            get_shows(myFave);
-          //console.log(myFave);
-      });
-
-      var show_id = event.target.dataset.show_id;
-      get_shows = function(myFave){
-      var show_options = {
-        method: 'GET',
-        endpoint: 'shows/' + show_id
-      };
-      apigee.request(show_options, function (err, data) {
-        if (err) {
-          console.log('Error');
-        } else {
-          $('#seasons_detail').empty();
-          var dtls = data.entities[0];
-          var chkbx = 'checkbox-off';
-          if(myFave){
-            chkbx = 'checkbox-on';
-          }
-          console.log('chkbx:' + chkbx);
-          $('#seasons_detail').append('<div><img src="' + dtls.image + '" alt="image" style="position: relative; width: 100%;" ></div><a data-role="button" href="http://www.imdb.com/title/' + dtls.imdb + '" target="_blank" style="display:inline-block; width: 50%; margin-left: 10%;">IMDB</a><div id="season-fave" data-season_id="'+ dtls.name +'" data-role="fieldcontain" style="display:inline-block;"><fieldset data-role="controlgroup" data-type="horizontal"><input id="season-fave-i"  name="" type="checkbox" checked='+ myFave+'><label  data-icon ='+ chkbx +' for="season-fave-i" style="width: 125%;">Favorite</label></fieldset></div><div><p><b>Synopsis</b></p><p>' + dtls.synopsis + '</p><br></div>');
-          $('#seasons_detail').trigger("create");
-        }
-      });
-    }
-
-      function valueOrDefault(val, def) {
-        if (def == undefined) def = "";
-        return val == undefined ? def : val;
-      }
-
-      var season_options = {
-        method: 'GET',
-        endpoint: 'seasons',
-        qs: {
-          'ql': "select * where name='" + event.target.dataset.show_id + "*'"
-        }
-      };
-      apigee.request(season_options, function (err, data) {
-        if (err) {
-          console.log('error');
-        } else {
-          //console.log(data.entities);
-          $('#seasons_list').empty();
-          $.each(data.entities, function (i, item) {
-            var season_no = $.trim(item.seasonNo).length === 1 ? '0' + item.seasonNo : item.seasonNo
-            //console.log(item.seasonNo);
-            $("#seasons_list").append('<li><a href="#episodes" data-transition="slide" data-show_title= "' + show_title + '"  data-season_no= ' + season_no + ' data-show_id=' + item.show + ' data-season_id=' + item.name + '>Season ' + season_no + '</a></li>');
-          });
-          $('#seasons_list').listview('refresh');
-        }
-      });
-    };
-
-    function loadEpisodes() {
-      /**-loading title-**/
-      var show_title = event.target.dataset.show_title;
-      var season_no = event.target.dataset.season_no;
-
-      $('#episodes-title').empty().append(show_title + ' - S' + season_no);
-
-      var season_options = {
-        method: 'GET',
-        endpoint: 'episodes',
-        qs: {
-          'ql': "select * where season contains '" + event.target.dataset.season_id + "'"
-        }
-      };
-      apigee.request(season_options, function (err, data) {
-        if (err) {
-          console.log('error');
-        } else {
-          $('#episodes_list').empty();
-          $.each(data.entities, function (i, item) {
-            var episode_no = $.trim(item.episodeNo).length === 1 ? '0' + item.episodeNo : item.episodeNo
-
-            $("#episodes_list").append('<li><a href="#episode-details" data-rel="dialog" data-transition="fade" data-show_title= "' + show_title + '" data-season_no= ' + season_no + ' data-episode_no= ' + episode_no + ' data-show_id=' + item.show + ' data-ep_synopsis="' + item.synopsis + '"" data-season_id=' + item.season + ' data-episode_id=' + item.name + ' data-ep_link= "' + item.link + '" >Episode ' + episode_no + ' - ' + item.title + '</a></li>');
-          });
-          $('#episodes_list').listview('refresh');
-        }
-      });
-    }
-
-    function loadEpisodePop() {
-      var show_title = event.target.dataset.show_title;
-      var season_no = event.target.dataset.season_no;
-      var episode_no = event.target.dataset.episode_no;
-      var episode_synopsis = event.target.dataset.ep_synopsis;
-      var ep_link = event.target.dataset.ep_link;
-      console.log(ep_link);
-      $('#episode-details-head').empty().append(show_title + ' - S' + season_no + 'E' + episode_no);
-      $('#episode-details-synopsis').empty().append('<p><b>Synopsis<b></p><p>' + episode_synopsis + '</p>');
-      $('#episodes-link').empty().append('<a data-role="button" data-inline="true" href="'+ ep_link +'" >Watch</a>').data('href', ep_link);
-    }
-
-    function addFave(flag, season){
-      var operation = 'DELETE';
-      if (flag == true)
-        operation = 'DELETE';
-      else
-        operation = 'POST';
-      console.log(operation);
-      var profiles_fave = {
-        method: operation,
-        endpoint:'shows/'+ season +'/likes/profiles/hulettemobile@gmail.com'
-      };
-      //endpoint:'/%2Fprofiles/hulettemobile%40gmail.com/likes/shows/' +  season  
-
-      apigee.request(profiles_fave, function (err, seasons) { 
-        if(err) {
-          console.log('Favorite failed!');
-        }
-        else{
-          //console.log(seasons);
-        }
-      });
-
-      var shows_faves = {
-        method: operation,
-        endpoint:'/profiles/hulettemobile@gmail.com/likes/shows/'+ season
-      };
-      //endpoint:'/%2Fprofiles/hulettemobile%40gmail.com/likes/shows/' +  season  
-
-      apigee.request(shows_faves, function (err, seasons) { 
-        if(err) {
-          console.log('Favorite failed!');
-        }
-        else{
-          //console.log(seasons);
-        }
-      });
-    }
-
-    function hulette() {
-
-      var show_houlette = {
-        method: 'GET',
-        endpoint: 'profiles/hulettemobile@gmail.com/likes'
-      };
-
-      
-      apigee.request(show_houlette, function (err, data) {
-        if (err) {
-          //error 
-        } 
-        else 
-        {
-          var ent  = data.entities;
-          var rand = 0;
-          if (ent)
-          {
-            rand = Math.floor(Math.random() * ent.length);
-            
-            var show = data.entities[rand].name;
-            var season_options = {
-              method: 'GET',
-              endpoint: 'episodes',
-              qs: {
-                'ql': "select * where season = '" + show + "*'"
-              }
-            };
-            apigee.request(season_options, function (err, data) {
-              if (err) {
-                console.log('error');
-              } else {
-                var ep = data.entities;
-                var randy = 0;
-                if (ep)
-                {
-                  randy = Math.floor(Math.random() * ep.length);
-                }
-              }
-            });
-
-          }
-        }
-      });
-
-      var huletteShow = shows_list[Math.floor(Math.random() * shows_list.length)];
-      var show_id = huletteShow;
-      //console.log(huletteShow);
-      var hulette_options = {
-        method: 'GET',
-        endpoint: 'shows/' + huletteShow
-      };
-      apigee.request(hulette_options, function (err, data) {
-        if (err) {
-          //error 
-        } else {
-          //console.log(data.entities);
-          $('#huletteContent').empty();
-          //console.log(item.seasonNo);
-          var dtls = data.entities[0];
-          $("#huletteContent").append('<div><img src="' + dtls.image + '" alt="image" style="position: relative; width: 100%;"></div><a data-role="button" href="#seasons" data-transition="slide" data-show_id=' + huletteShow + ' class="show_id" onclick = "loadShow();">' + dtls.title + '</a><div><h3>Synopsis</h3><p>' + dtls.synopsis + '</p></div><div><p><b>Season # Episode #&nbsp;</b></p></div><ul data-role="listview" data-divider-theme="b" data-inset="false"><li data-theme="c"><a href="http://www.imdb.com/title/' + dtls.imdb + '" data-transition="slide">Watch Now</a></li></ul>');
-        }
-        $('#huletteContent').trigger("create");
-      });
-    };
-
-    function loadFaveSeasons(){
-      
-      var show_fave_options = {
-        method: 'GET',
-        endpoint: 'profiles/hulettemobile@gmail.com/likes'
-      };
-
-      $("#shows-list").empty();
-      apigee.request(show_fave_options, function (err, data) {
-        if (err) {
-          //error 
-        } 
-        else 
-        {
-          //console.log(data);
-          $.each(data.entities, function (i, item) {
-          $("#shows-list").append('<li data-theme="c"><a href="#seasons" data-transition="slide" data-show_title= "' + item.title + '" data-show_id=' + item.name  + ' class="show_id">' + item.title + '</a></li>');
-          });
-        }
-        $("#shows-list").listview('refresh');
-      });
-    }
-
-    $(document).ready(function () {
-      $('#radiobutton2').trigger('click');
-      loadShows();
-      $('ul#shows-list').on('click', 'li', loadSeasons);
-      $('ul#seasons_list').on('click', 'li', loadEpisodes);
-      $('ul#episodes_list').on('click', 'li', loadEpisodePop);
-      $('#radio-fave').on('click', loadFaveSeasons);
-      $('#radio-shows').on('click', loadShows);
-      
-      
-      /*-- Search -- */
-      $('#shows').on('keyup', '#shows_search', function () {
-        var value = $('#shows_search').val();
-        var filtr = new RegExp(value, 'i');
-
-        $("#shows-list > li").each(function () {
-          if ($(this).text().search(filtr) > -1) {
-            $(this).show();
-          } else {
-            $(this).hide();
-          }
-        });
-        $('#shows_search').focus();
-      });
-
-      /*-- Favorites --*/
-      $('#seasons_detail').on('click', '#season-fave', function(){
-        //console.log(event);
-        var season_id = this.dataset.season_id;
-        var chk = $('#season-fave-i').next().attr('data-icon');
-        console.log('chk');
-        var flag = true;
-        if ( chk == 'checkbox-off')
-          flag = true;
-        else
-          flag = false;
-        
-        if ( event.target.checked )
-        {
-          addFave(flag, season_id);
-        }
-        else
-        {
-          addFave(flag, season_id);
-        }
-        //console.log('favorite');
-      });
-
-      
-    });
-  </script>
 </body>
+	<!-- Script -->
+	<script type="text/javascript">
+	var shows_list = [];
+
+	var apigee = new Usergrid.Client({
+	  orgName: 'hulettemobile',
+	  appName: 'sandbox'
+	});
+
+	// A Collection object that will be used to hold the list of shows locally
+	var all_shows = new Usergrid.Collection({
+	  "client": apigee,
+	  "type": "shows",
+	  qs:{limit:50}
+	});
+
+	function loadShows() {
+	  all_shows.fetch(
+		function () {
+		  $('#shows-list').empty();
+		  var i = 0;
+		  while (all_shows.hasNextEntity()) {
+			var current_show = all_shows.getNextEntity();
+
+			var show_id = current_show.get("name");
+			var title = current_show.get("title");
+			$("#shows-list").append('<li data-theme="c"><a href="#seasons" data-transition="slide" data-show_title= "' + title + '" data-show_id=' + show_id + ' class="show_id">' + current_show.get("title") + '</a></li>');
+			shows_list[i] = show_id;
+			i++;
+		  }
+		  // Re-apply jQuery Mobile styles
+		  $('#shows-list').listview('refresh');
+		},
+
+		// Failure Callback
+
+		function () {
+		  alert("read failed");
+		}
+	  );
+	};
+
+	function loadSeasons() {
+	  //console.log(event.target.dataset.show_id);
+	  /**-loading title-**/
+	  var show_title = event.target.dataset.show_title;
+	  $('#seasons-title').empty().append(show_title);
+
+	  //favorite store
+	  var myFave = false;
+	  var show_fave = {
+		method: 'GET',
+		endpoint: 'shows/' + event.target.dataset.show_id + '/likes'
+	  };
+	  apigee.request(show_fave, function (err, data) {
+		//console.log(myFave);
+		if(err)
+		  console.log('likes error');
+		else
+		  console.log(data.entities[0]);
+		  if (data.entities[0] != undefined)
+			myFave = true;
+			get_shows(myFave);
+		  //console.log(myFave);
+	  });
+
+	  var show_id = event.target.dataset.show_id;
+	  get_shows = function(myFave){
+	  var show_options = {
+		method: 'GET',
+		endpoint: 'shows/' + show_id
+	  };
+	  apigee.request(show_options, function (err, data) {
+		if (err) {
+		  console.log('Error');
+		} else {
+		  $('#seasons_detail').empty();
+		  var dtls = data.entities[0];
+		  var chkbx = 'checkbox-off';
+		  if(myFave){
+			chkbx = 'checkbox-on';
+		  }
+		  console.log('chkbx:' + chkbx);
+		  $('#seasons_detail').append('<div><img src="' + dtls.image + '" alt="image" style="position: relative; width: 100%;" ></div><a data-role="button" href="http://www.imdb.com/title/' + dtls.imdb + '" target="_blank" style="display:inline-block; width: 50%; margin-left: 10%;">IMDB</a><div id="season-fave" data-season_id="'+ dtls.name +'" data-role="fieldcontain" style="display:inline-block;"><fieldset data-role="controlgroup" data-type="horizontal"><input id="season-fave-i"  name="" type="checkbox" checked='+ myFave+'><label  data-icon ='+ chkbx +' for="season-fave-i" style="width: 125%;">Favorite</label></fieldset></div><div><p><b>Synopsis</b></p><p>' + dtls.synopsis + '</p><br></div>');
+		  $('#seasons_detail').trigger("create");
+		}
+	  });
+	}
+
+	  function valueOrDefault(val, def) {
+		if (def == undefined) def = "";
+		return val == undefined ? def : val;
+	  }
+
+	  var season_options = {
+		method: 'GET',
+		endpoint: 'seasons',
+		qs: {
+		  'ql': "select * where name='" + event.target.dataset.show_id + "*'"
+		}
+	  };
+	  
+	  apigee.request(season_options, function (err, data) {
+		if (err) {
+		  console.log('error');
+		} else {
+		  //console.log(data.entities);
+		  $('#seasons_list').empty();
+		  $.each(data.entities, function (i, item) {
+			var season_no = $.trim(item.seasonNo).length === 1 ? '0' + item.seasonNo : item.seasonNo
+			//console.log(item.seasonNo);
+			$("#seasons_list").append('<li><a href="#episodes" data-transition="slide" data-show_title= "' + show_title + '"  data-season_no= ' + season_no + ' data-show_id=' + item.show + ' data-season_id=' + item.name + '>Season ' + season_no + '</a></li>');
+		  });
+		  $('#seasons_list').listview('refresh');
+		}
+	  });
+	};
+
+	function loadEpisodes() {
+	  /**-loading title-**/
+	  var show_title = event.target.dataset.show_title;
+	  var season_no = event.target.dataset.season_no;
+
+	  $('#episodes-title').empty().append(show_title + ' - S' + season_no);
+
+	  var season_options = {
+		method: 'GET',
+		endpoint: 'episodes',
+		qs: {
+		  'ql': "select * where season contains '" + event.target.dataset.season_id + "'"
+		}
+	  };
+	  apigee.request(season_options, function (err, data) {
+		if (err) {
+		  console.log('error');
+		} else {
+		  $('#episodes_list').empty();
+		  $.each(data.entities, function (i, item) {
+			var episode_no = $.trim(item.episodeNo).length === 1 ? '0' + item.episodeNo : item.episodeNo
+
+			$("#episodes_list").append('<li><a href="#episode-details" data-rel="dialog" data-transition="fade" data-show_title= "' + show_title + '" data-season_no= ' + season_no + ' data-episode_no= ' + episode_no + ' data-show_id=' + item.show + ' data-ep_synopsis="' + item.synopsis + '"" data-season_id=' + item.season + ' data-episode_id=' + item.name + ' data-ep_link= "' + item.link + '" >Episode ' + episode_no + ' - ' + item.title + '</a></li>');
+		  });
+		  $('#episodes_list').listview('refresh');
+		}
+	  });
+	}
+
+	function loadEpisodePop() {
+	  var show_title = event.target.dataset.show_title;
+	  var season_no = event.target.dataset.season_no;
+	  var episode_no = event.target.dataset.episode_no;
+	  var episode_synopsis = event.target.dataset.ep_synopsis;
+	  var ep_link = event.target.dataset.ep_link;
+	  console.log(ep_link);
+	  $('#episode-details-head').empty().append(show_title + ' - S' + season_no + 'E' + episode_no);
+	  $('#episode-details-synopsis').empty().append('<p><b>Synopsis<b></p><p>' + episode_synopsis + '</p>');
+	  $('#episodes-link').empty().append('<a data-role="button" data-inline="true" href="'+ ep_link +'" >Watch</a>').data('href', ep_link);
+	}
+
+	function addFave(flag, season){
+	  var operation = 'DELETE';
+	  if (flag == true)
+		operation = 'DELETE';
+	  else
+		operation = 'POST';
+	  console.log(operation);
+	  var profiles_fave = {
+		method: operation,
+		endpoint:'shows/'+ season +'/likes/profiles/hulettemobile@gmail.com'
+	  };
+	  //endpoint:'/%2Fprofiles/hulettemobile%40gmail.com/likes/shows/' +  season  
+
+	  apigee.request(profiles_fave, function (err, seasons) { 
+		if(err) {
+		  console.log('Favorite failed!');
+		}
+		else{
+		  //console.log(seasons);
+		}
+	  });
+
+	  var shows_faves = {
+		method: operation,
+		endpoint:'/profiles/hulettemobile@gmail.com/likes/shows/'+ season
+	  };
+	  //endpoint:'/%2Fprofiles/hulettemobile%40gmail.com/likes/shows/' +  season  
+
+	  apigee.request(shows_faves, function (err, seasons) { 
+		if(err) {
+		  console.log('Favorite failed!');
+		}
+		else{
+		  //console.log(seasons);
+		}
+	  });
+	}
+
+	function hulette() {
+
+	  var show_houlette = {
+		method: 'GET',
+		endpoint: 'profiles/hulettemobile@gmail.com/likes'
+	  };
+
+	  
+	  apigee.request(show_houlette, function (err, data) {
+		if (err) {
+		  //error 
+		} 
+		else 
+		{
+		  var ent  = data.entities;
+		  var rand = 0;
+		  if (ent)
+		  {
+			rand = Math.floor(Math.random() * ent.length);
+			
+			var show = data.entities[rand].name;
+			var season_options = {
+			  method: 'GET',
+			  endpoint: 'episodes',
+			  qs: {
+				'ql': "select * where season = '" + show + "*'"
+			  }
+			};
+			apigee.request(season_options, function (err, data) {
+			  if (err) {
+				console.log('error');
+			  } else {
+				var ep = data.entities;
+				var randy = 0;
+				if (ep)
+				{
+				  randy = Math.floor(Math.random() * ep.length);
+				}
+			  }
+			});
+
+		  }
+		}
+	  });
+
+	  var huletteShow = shows_list[Math.floor(Math.random() * shows_list.length)];
+	  var show_id = huletteShow;
+	  //console.log(huletteShow);
+	  var hulette_options = {
+		method: 'GET',
+		endpoint: 'shows/' + huletteShow
+	  };
+	  apigee.request(hulette_options, function (err, data) {
+		if (err) {
+		  //error 
+		} else {
+		  //console.log(data.entities);
+		  $('#huletteContent').empty();
+		  //console.log(item.seasonNo);
+		  var dtls = data.entities[0];
+		  $("#huletteContent").append('<div><img src="' + dtls.image + '" alt="image" style="position: relative; width: 100%;"></div><a data-role="button" href="#seasons" data-transition="slide" data-show_id=' + huletteShow + ' class="show_id" onclick = "loadShow();">' + dtls.title + '</a><div><h3>Synopsis</h3><p>' + dtls.synopsis + '</p></div><div><p><b>Season # Episode #&nbsp;</b></p></div><ul data-role="listview" data-divider-theme="b" data-inset="false"><li data-theme="c"><a href="http://www.imdb.com/title/' + dtls.imdb + '" data-transition="slide">Watch Now</a></li></ul>');
+		}
+		$('#huletteContent').trigger("create");
+	  });
+	};
+
+	function loadFaveSeasons(){
+	  
+	  var show_fave_options = {
+		method: 'GET',
+		endpoint: 'profiles/hulettemobile@gmail.com/likes'
+	  };
+
+	  $("#shows-list").empty();
+	  apigee.request(show_fave_options, function (err, data) {
+		if (err) {
+		  //error 
+		} 
+		else 
+		{
+		  //console.log(data);
+		  $.each(data.entities, function (i, item) {
+		  $("#shows-list").append('<li data-theme="c"><a href="#seasons" data-transition="slide" data-show_title= "' + item.title + '" data-show_id=' + item.name  + ' class="show_id">' + item.title + '</a></li>');
+		  });
+		}
+		$("#shows-list").listview('refresh');
+	  });
+	}
+
+	$(document).ready(function () {
+	  $('#radiobutton2').trigger('click');
+	  loadShows();
+	  $('ul#shows-list').on('click', 'li', loadSeasons);
+	  $('ul#seasons_list').on('click', 'li', loadEpisodes);
+	  $('ul#episodes_list').on('click', 'li', loadEpisodePop);
+	  $('#radio-fave').on('click', loadFaveSeasons);
+	  $('#radio-shows').on('click', loadShows);
+	  $('span.ui-icon-shadow').on('click',loadShows);
+	  
+	  /*-- Search -- */
+	  $('#shows').on('keyup', '#shows_search', function () {
+		var value = $('#shows_search').val();
+		var filtr = new RegExp(value, 'i');
+
+		$("#shows-list > li").each(function () {
+		  if ($(this).text().search(filtr) > -1) {
+			$(this).show();
+		  } else {
+			$(this).hide();
+		  }
+		});
+		$('#shows_search').focus();
+	  });
+
+	  /*-- Favorites --*/
+	  $('#seasons_detail').on('click', '#season-fave', function(){
+		//console.log(event);
+		var season_id = this.dataset.season_id;
+		var chk = $('#season-fave-i').next().attr('data-icon');
+		console.log('chk');
+		var flag = true;
+		if ( chk == 'checkbox-off')
+		  flag = true;
+		else
+		  flag = false;
+		
+		if ( event.target.checked )
+		{
+		  addFave(flag, season_id);
+		}
+		else
+		{
+		  addFave(flag, season_id);
+		}
+		//console.log('favorite');
+	  });
+
+	  
+	});
+  </script>
 </html>
